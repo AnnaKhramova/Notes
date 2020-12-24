@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class NoteToDoList extends Note implements Serializable {
+public class NoteToDoList extends Note {
     private List<String> toDoList;
 
     public NoteToDoList(){

@@ -5,7 +5,7 @@ import javax.swing.*;
 ;
 import java.io.Serializable;
 
-public class NoteWithImage extends Note implements Serializable {
+public class NoteWithImage extends Note {
    private ImageIcon image;
 
    public NoteWithImage(){}

@@ -3,9 +3,9 @@ package inputData;
 import java.io.Serializable;
 import java.util.Date;
 
-public class NoteText extends Note implements Serializable {
+public class NoteText extends Note {
 
-    String textNote;
+   private String textNote;
 
     public NoteText() {
     }
