@@ -65,31 +65,30 @@ public class StartWindow extends JDialog {
         buttonDateChose1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String dateStr = null;
-                Date date = new Date();
                 jDateBeg = new JDateChooser();
                 String message = "Choose start date:\n";
                 Object[] params = {message, jDateBeg};
                 jDateBeg.setDateFormatString("yyyy-MM-dd");
                 JOptionPane.showConfirmDialog(null, params, "Start date", JOptionPane.PLAIN_MESSAGE);
-                if (jDateBeg != null) {
-
+                if (jDateBeg != null)
                     dateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateBeg.getDate());
-                }
                 textFieldDate1.setText(dateStr);
 
             }
         });
         buttonDateChose2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String date = null;
+                String dateStr = null;
                 jDateEnd = new JDateChooser();
                 String message = "Choose end date:\n";
+                jDateEnd.setDateFormatString("yyyy-MM-dd");
                 Object[] params = {message, jDateEnd};
                 JOptionPane.showConfirmDialog(null, params, "End date", JOptionPane.PLAIN_MESSAGE);
                 if (jDateEnd != null)
-                    date = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateEnd.getDate());
-                textFieldDate2.setText(date);
+                    dateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateEnd.getDate());
+                textFieldDate2.setText(dateStr);
             }
+
         });
         addTextNotes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
