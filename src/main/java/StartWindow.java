@@ -29,13 +29,13 @@ public class StartWindow extends JDialog {
     private JCheckBox choiceAllToDoListNote;
     private JCheckBox choiceAllNoteWithImage;
     private JCheckBox choiceAll;
-    private JButton useChoiceFiter;
+    private JButton useChoiceFilter;
     private JLabel textFieldDate1;
     private JLabel textFieldDate2;
     private JButton buttonDateChose1;
     private JButton buttonDateChose2;
     private JTextArea searchArea;
-    private JButton udateDateButton;
+    private JButton updateDateButton;
     private JLabel updateDate;
     private List<Note> noteList;
     private JDateChooser jDateBeg;
@@ -208,7 +208,7 @@ public class StartWindow extends JDialog {
                 }//else error запись не выбрана
             }
         });
-        useChoiceFiter.addActionListener(new ActionListener() {
+        useChoiceFilter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String str = searchArea.getText();
@@ -247,7 +247,7 @@ public class StartWindow extends JDialog {
                 jListWithNote.setModel(defaultListModel);
             }
         });
-        udateDateButton.addActionListener(new ActionListener() {
+        updateDateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jDateBeg = null;
@@ -256,6 +256,7 @@ public class StartWindow extends JDialog {
                 textFieldDate2.setText(null);
             }
         });
+
         choiceAllTextNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -263,6 +264,7 @@ public class StartWindow extends JDialog {
                     choiceAll.setSelected(false);
             }
         });
+
         choiceAllToDoListNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -270,6 +272,7 @@ public class StartWindow extends JDialog {
                     choiceAll.setSelected(false);
             }
         });
+
         choiceAllNoteWithImage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -314,6 +317,4 @@ public class StartWindow extends JDialog {
         }
         return 0;
     }
-
-
 }

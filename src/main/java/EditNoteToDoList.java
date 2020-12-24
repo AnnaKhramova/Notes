@@ -60,6 +60,7 @@ public class EditNoteToDoList extends JDialog {
                 objectDefaultToDoListModel.addElement(jTextArea.getText());
             }
         });
+
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,6 +72,7 @@ public class EditNoteToDoList extends JDialog {
                 }else JOptionPane.showMessageDialog(null, "Выберите элемент для удаления!");
             }
         });
+
         changeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +89,7 @@ public class EditNoteToDoList extends JDialog {
                 } else JOptionPane.showMessageDialog(null, "Выберите элемент для редактирования!");
             }
         });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,8 +1,6 @@
 package inputData;
 
-
 import javax.swing.*;
-;
 import java.io.Serializable;
 
 public class NoteWithImage extends Note implements Serializable {

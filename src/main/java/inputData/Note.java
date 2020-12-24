@@ -15,8 +15,6 @@ public abstract class Note implements Serializable {
         this.header = header;
     }
 
-
-
     public Date getDateCreate() {
         return dateCreate;
     }

@@ -8,6 +8,7 @@ public class NoteText extends Note implements Serializable {
     String textNote;
 
     public NoteText() {
+
     }
 
     public NoteText(String header, String textNote, Date date) {
@@ -15,7 +16,6 @@ public class NoteText extends Note implements Serializable {
         this.textNote = textNote;
         this.dateCreate = date;
     }
-
 
     public String getTextNote() {
         return textNote;

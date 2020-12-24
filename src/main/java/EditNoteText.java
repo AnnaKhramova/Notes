@@ -29,11 +29,8 @@ public class EditNoteText extends JDialog {
     public EditNoteText() {
         setContentPane(contentPane);
         setModal(true);
-
-
-        // call onCancel() when cross is clicked
+        // вызвать onCancel() при нажатии крестика
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
