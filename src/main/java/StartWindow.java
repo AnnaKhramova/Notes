@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Writer;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,10 +71,15 @@ public class StartWindow extends JDialog {
 
                 String message = "Choose start date:\n";
                 Object[] params = {message, jDateBeg};
-                jDateBeg.setDateFormatString("yyyy-MM-dd");
+                jDateBeg.setDateFormatString("dd-MM-yyyy");
                 JOptionPane.showConfirmDialog(null, params, "Start date", JOptionPane.PLAIN_MESSAGE);
                 if (jDateBeg.getDate() != null) {
-                    dateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateBeg.getDate());
+                    dateStr = (new SimpleDateFormat("dd-MM-yyyy")).format(jDateBeg.getDate());
+                    try {
+                        jDateBeg.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(dateStr));  //для выставлени времени в 00:00
+                    } catch (ParseException parseException) {
+                        parseException.printStackTrace();
+                    }
                     textFieldDate1.setText(dateStr);
                 }
 
@@ -88,7 +94,12 @@ public class StartWindow extends JDialog {
                 Object[] params = {message, jDateEnd};
                 JOptionPane.showConfirmDialog(null, params, "End date", JOptionPane.PLAIN_MESSAGE);
                 if (jDateEnd.getDate() != null) {
-                    dateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateEnd.getDate());
+                    dateStr = (new SimpleDateFormat("dd-MM-yyyy")).format(jDateEnd.getDate());
+                    try {
+                        jDateEnd.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(dateStr + " 23:59:59"));  //для выставлени времени в 00:00
+                    } catch (ParseException parseException) {
+                        parseException.printStackTrace();
+                    }
                     textFieldDate2.setText(dateStr);
                 }
             }
