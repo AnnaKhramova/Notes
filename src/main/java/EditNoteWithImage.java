@@ -32,6 +32,7 @@ public class EditNoteWithImage extends JDialog {
 
     public void setImageLabel(ImageIcon imageIcon) {
         this.imageLabel.setIcon(imageIcon);
+        noteWithImage.setImage(imageIcon);
     }
 
     public int getStatusCode() {
@@ -71,12 +72,10 @@ public class EditNoteWithImage extends JDialog {
         saveNodeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (noteWithImage.getImage() != null) {
                     statusCode = 1;
                     noteWithImage.setHeader(textAreaHeader.getText());
                     noteWithImage.setDateCreate(new Date());
                     dispose();
-                } else JOptionPane.showMessageDialog(null, "Добавьте картинку чтобы сохранить");
             }
         });
     }

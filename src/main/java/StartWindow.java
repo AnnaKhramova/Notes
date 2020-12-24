@@ -105,7 +105,7 @@ public class StartWindow extends JDialog {
                     defaultListModel.addElement(noteText);
                     noteList.add(noteText);
                 } else
-                    JOptionPane.showMessageDialog(null, "Список не сохранился!");//else не сохранились изменнения
+                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");//else не сохранились изменнения
             }
         });
 
@@ -119,7 +119,7 @@ public class StartWindow extends JDialog {
                     defaultListModel.addElement(noteToDoList);
                     noteList.add(noteToDoList);
                 } else
-                    JOptionPane.showMessageDialog(null, "Список не сохранился!");//else не сохранились изменнения
+                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");//else не сохранились изменнения
             }
         });
 
@@ -129,10 +129,11 @@ public class StartWindow extends JDialog {
                 editNoteWithImageDialog.pack();
                 editNoteWithImageDialog.setVisible(true);
                 NoteWithImage noteWithImage = editNoteWithImageDialog.getNoteWithImage();
-                if (noteWithImage.getImage() != null) {
+                if (editNoteWithImageDialog.getStatusCode() == 1) {
                     defaultListModel.addElement(noteWithImage);
                     noteList.add(noteWithImage);
-                }
+                } else
+                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");
             }
         });
 
