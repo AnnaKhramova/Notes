@@ -44,6 +44,8 @@ public class StartWindow extends JDialog {
     public StartWindow() {
         setContentPane(contentPane);
         setModal(true);
+        jDateBeg = new JDateChooser();
+        jDateEnd = new JDateChooser();
         //noteList = new ArrayList<>();
         //defaultListModel = new DefaultListModel<>();
         //jListWithNote.setModel(defaultListModel);
@@ -65,28 +67,30 @@ public class StartWindow extends JDialog {
         buttonDateChose1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String dateStr = null;
-                jDateBeg = new JDateChooser();
+
                 String message = "Choose start date:\n";
                 Object[] params = {message, jDateBeg};
                 jDateBeg.setDateFormatString("yyyy-MM-dd");
                 JOptionPane.showConfirmDialog(null, params, "Start date", JOptionPane.PLAIN_MESSAGE);
-                if (jDateBeg != null)
+                if (jDateBeg.getDate() != null) {
                     dateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateBeg.getDate());
-                textFieldDate1.setText(dateStr);
+                    textFieldDate1.setText(dateStr);
+                }
 
             }
         });
         buttonDateChose2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String dateStr = null;
-                jDateEnd = new JDateChooser();
+
                 String message = "Choose end date:\n";
                 jDateEnd.setDateFormatString("yyyy-MM-dd");
                 Object[] params = {message, jDateEnd};
                 JOptionPane.showConfirmDialog(null, params, "End date", JOptionPane.PLAIN_MESSAGE);
-                if (jDateEnd != null)
+                if (jDateEnd.getDate() != null) {
                     dateStr = (new SimpleDateFormat("yyyy-MM-dd")).format(jDateEnd.getDate());
-                textFieldDate2.setText(dateStr);
+                    textFieldDate2.setText(dateStr);
+                }
             }
 
         });
@@ -216,9 +220,9 @@ public class StartWindow extends JDialog {
                 for (int i = 0; i < noteList.size(); ++i) {
                     Note note = noteList.get(i);
 
-                    if (jDateBeg == null && jDateEnd == null
-                            || jDateBeg == null && (note.getDateCreate().before(jDateEnd.getDate()) || note.getDateCreate().equals(jDateEnd.getDate()))    //t1=null && x<=t2
-                            || jDateEnd == null && (note.getDateCreate().after(jDateBeg.getDate()) || note.getDateCreate().equals(jDateBeg.getDate())) //t1<=x && t2=null
+                    if (jDateBeg.getDate() == null && jDateEnd.getDate() == null
+                            || jDateBeg.getDate() == null && (note.getDateCreate().before(jDateEnd.getDate()) || note.getDateCreate().equals(jDateEnd.getDate()))    //t1=null && x<=t2
+                            || jDateEnd.getDate() == null && (note.getDateCreate().after(jDateBeg.getDate()) || note.getDateCreate().equals(jDateBeg.getDate())) //t1<=x && t2=null
                             || note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().equals(jDateEnd.getDate())  //t1<x=t2
                             || note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate())  //t1<x<t2
                             || note.getDateCreate().equals(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate())) {  //t1<x=t2
@@ -250,8 +254,8 @@ public class StartWindow extends JDialog {
         updateDateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jDateBeg = null;
-                jDateEnd = null;
+                jDateBeg.setDate(null);
+                jDateEnd.setDate(null);
                 textFieldDate1.setText(null);
                 textFieldDate2.setText(null);
             }
