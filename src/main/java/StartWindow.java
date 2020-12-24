@@ -210,7 +210,8 @@ public class StartWindow extends JDialog {
                 if (index >= 0) {
                     noteList.remove(defaultListModel.getElementAt(index));
                     defaultListModel.removeElementAt(index);
-                }//else error запись не выбрана
+                } else
+                    JOptionPane.showMessageDialog(null, "Элемент для удаления не выбран!");
             }
         });
         useChoiceFilter.addActionListener(new ActionListener() {
@@ -221,12 +222,13 @@ public class StartWindow extends JDialog {
                 for (int i = 0; i < noteList.size(); ++i) {
                     Note note = noteList.get(i);
 
-                    if (jDateBeg.getDate() == null && jDateEnd.getDate() == null
+                    if ((jDateBeg.getDate() == null && jDateEnd.getDate() == null)
                             || jDateBeg.getDate() == null && (note.getDateCreate().before(jDateEnd.getDate()) || note.getDateCreate().equals(jDateEnd.getDate()))    //t1=null && x<=t2
                             || jDateEnd.getDate() == null && (note.getDateCreate().after(jDateBeg.getDate()) || note.getDateCreate().equals(jDateBeg.getDate())) //t1<=x && t2=null
-                            || note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().equals(jDateEnd.getDate())  //t1<x=t2
+                            || ((!note.getDateCreate().after(jDateEnd.getDate())) && (!note.getDateCreate().before(jDateBeg.getDate())))  //если диапазон t2<x&&t1>x то не пропускать такую ситуацию
+                            && (note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().equals(jDateEnd.getDate())  //t1<x=t2
                             || note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate())  //t1<x<t2
-                            || note.getDateCreate().equals(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate())) {  //t1<x=t2
+                            || note.getDateCreate().equals(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate()))) {  //t1<x=t2
                         if (note.getClass() == NoteText.class) {
                             if (choiceAllTextNote.isSelected() != true)
                                 continue;
