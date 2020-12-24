@@ -9,7 +9,6 @@ public class FileReaderWriter {
             ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
             objectOutput.writeObject(obj);
         }
-
     }
 
     public static Object Read() throws IOException, ClassNotFoundException {
@@ -18,5 +17,4 @@ public class FileReaderWriter {
             return objectInput.readObject();
         }
     }
-
 }

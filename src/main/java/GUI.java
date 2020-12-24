@@ -24,6 +24,5 @@ public class GUI {
             e.printStackTrace();
         }
         System.exit(0);
-
     }
 }
