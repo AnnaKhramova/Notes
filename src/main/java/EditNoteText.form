@@ -18,6 +18,7 @@
           </grid>
         </constraints>
         <properties>
+          <lineWrap value="false"/>
           <text value=""/>
           <toolTipText value="Введите текст заметки"/>
         </properties>

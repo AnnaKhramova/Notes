@@ -1,15 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.toedter.calendar.JDateChooser;
-import functionals.FileReaderWriter;
 import inputData.Note;
 import inputData.NoteText;
 import inputData.NoteToDoList;
@@ -37,7 +33,6 @@ public class StartWindow extends JDialog {
     private JButton buttonDateChose2;
     private JTextArea searchArea;
     private JButton updateDateButton;
-    private JLabel updateDate;
     private List<Note> noteList;
     private JDateChooser jDateBeg;
     private JDateChooser jDateEnd;
@@ -47,10 +42,6 @@ public class StartWindow extends JDialog {
         setModal(true);
         jDateBeg = new JDateChooser();
         jDateEnd = new JDateChooser();
-        //noteList = new ArrayList<>();
-        //defaultListModel = new DefaultListModel<>();
-        //jListWithNote.setModel(defaultListModel);
-
 
         choiceAll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -65,6 +56,7 @@ public class StartWindow extends JDialog {
                 }
             }
         });
+
         buttonDateChose1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String dateStr = null;
@@ -75,16 +67,16 @@ public class StartWindow extends JDialog {
                 JOptionPane.showConfirmDialog(null, params, "Start date", JOptionPane.PLAIN_MESSAGE);
                 if (jDateBeg.getDate() != null) {
                     dateStr = (new SimpleDateFormat("dd-MM-yyyy")).format(jDateBeg.getDate());
-                    try {
-                        jDateBeg.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(dateStr));  //для выставлени времени в 00:00
+                    try { //для выставления времени в 00:00
+                        jDateBeg.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(dateStr));
                     } catch (ParseException parseException) {
                         parseException.printStackTrace();
                     }
                     textFieldDate1.setText(dateStr);
                 }
-
             }
         });
+
         buttonDateChose2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String dateStr = null;
@@ -95,19 +87,18 @@ public class StartWindow extends JDialog {
                 JOptionPane.showConfirmDialog(null, params, "End date", JOptionPane.PLAIN_MESSAGE);
                 if (jDateEnd.getDate() != null) {
                     dateStr = (new SimpleDateFormat("dd-MM-yyyy")).format(jDateEnd.getDate());
-                    try {
-                        jDateEnd.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(dateStr + " 23:59:59"));  //для выставлени времени в 00:00
+                    try { //для выставления времени в 00:00
+                        jDateEnd.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(dateStr + " 23:59:59"));
                     } catch (ParseException parseException) {
                         parseException.printStackTrace();
                     }
                     textFieldDate2.setText(dateStr);
                 }
             }
-
         });
+
         addTextNotes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 EditNoteText editNoteTextDialog = new EditNoteText();
                 editNoteTextDialog.pack();
                 editNoteTextDialog.setVisible(true);
@@ -115,8 +106,8 @@ public class StartWindow extends JDialog {
                 if (editNoteTextDialog.getNoteText() != null) {
                     defaultListModel.addElement(noteText);
                     noteList.add(noteText);
-                } else
-                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");//else не сохранились изменнения
+                } else //else не сохранились изменения
+                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");
             }
         });
 
@@ -129,8 +120,8 @@ public class StartWindow extends JDialog {
                 if (editNoteToDoListDialog.getStatusCode() == 1) {
                     defaultListModel.addElement(noteToDoList);
                     noteList.add(noteToDoList);
-                } else
-                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");//else не сохранились изменнения
+                } else //else не сохранились изменения
+                    JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");
             }
         });
 
@@ -143,7 +134,7 @@ public class StartWindow extends JDialog {
                 if (editNoteWithImageDialog.getStatusCode() == 1) {
                     defaultListModel.addElement(noteWithImage);
                     noteList.add(noteWithImage);
-                } else
+                } else //else не сохранились изменения
                     JOptionPane.showMessageDialog(null, "Заметка не сохранилась!");
             }
         });
@@ -162,19 +153,18 @@ public class StartWindow extends JDialog {
                         editNoteTextDialog.pack();
                         editNoteTextDialog.setVisible(true);
 
-
                         if (editNoteTextDialog.getNoteText() != null) {//если нажали сохранить
-                            noteList.remove(defaultListModel.getElementAt(index));//удаляем по объекту так как он может хранится в главном когда применены фильтры а инексация будет разная
+                            // удаляем по объекту, так как он может хранится в главном, когда применены фильтры, а индексация будет разная
+                            noteList.remove(defaultListModel.getElementAt(index));
                             defaultListModel.removeElementAt(index);//сначала старый удаляем
 
                             defaultListModel.addElement(editNoteTextDialog.getNoteText());//сохраняем новый
                             noteList.add(editNoteTextDialog.getNoteText());
 
-                        } else
-                            JOptionPane.showMessageDialog(null, "Изменения не сохранились!");//else не сохранились изменнения
+                        } else //else не сохранились изменения
+                            JOptionPane.showMessageDialog(null, "Изменения не сохранились!");
 
                     } else if (object.getClass() == NoteToDoList.class) {
-                        //
                         EditNoteToDoList editNoteToDoListDialog = new EditNoteToDoList();
                         editNoteToDoListDialog.getTextAreaHeader().setText(((NoteToDoList) object).getHeader());
                         editNoteToDoListDialog.setNoteToDoList(((NoteToDoList) object));
@@ -187,10 +177,8 @@ public class StartWindow extends JDialog {
                             defaultListModel.removeElementAt(index);
                             defaultListModel.addElement(editNoteToDoListDialog.getNoteToDoList());
                             noteList.add(editNoteToDoListDialog.getNoteToDoList());
-                        } else
-                            JOptionPane.showMessageDialog(null, "Изменения не сохранились!");//else не сохранились изменнения
-
-
+                        } else //else не сохранились изменения
+                            JOptionPane.showMessageDialog(null, "Изменения не сохранились!");
                     } else if (object.getClass() == NoteWithImage.class) {
 
                         EditNoteWithImage editNoteWithImageDialog = new EditNoteWithImage();
@@ -206,14 +194,14 @@ public class StartWindow extends JDialog {
                             defaultListModel.removeElementAt(index);
                             defaultListModel.addElement(noteWithImage);
                             noteList.add(noteWithImage);
-                        } else
-                            JOptionPane.showMessageDialog(null, "Изменения не сохранились!");//else не сохранились изменнения
-
+                        } else //else не сохранились изменения
+                            JOptionPane.showMessageDialog(null, "Изменения не сохранились!");
                     }
                 } else
                     JOptionPane.showMessageDialog(null, "Элемент для редактирования не выбран!");
             }
         });
+
         deleteNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -225,6 +213,7 @@ public class StartWindow extends JDialog {
                     JOptionPane.showMessageDialog(null, "Элемент для удаления не выбран!");
             }
         });
+
         useChoiceFilter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -236,10 +225,10 @@ public class StartWindow extends JDialog {
                     if ((jDateBeg.getDate() == null && jDateEnd.getDate() == null)
                             || jDateBeg.getDate() == null && (note.getDateCreate().before(jDateEnd.getDate()) || note.getDateCreate().equals(jDateEnd.getDate()))    //t1=null && x<=t2
                             || jDateEnd.getDate() == null && (note.getDateCreate().after(jDateBeg.getDate()) || note.getDateCreate().equals(jDateBeg.getDate())) //t1<=x && t2=null
-                            || ((!note.getDateCreate().after(jDateEnd.getDate())) && (!note.getDateCreate().before(jDateBeg.getDate())))  //если диапазон t2<x&&t1>x то не пропускать такую ситуацию
+                            || ((!note.getDateCreate().after(jDateEnd.getDate())) && (!note.getDateCreate().before(jDateBeg.getDate())))  //если диапазон t2<x&&t1>x, то не пропускать такую ситуацию
                             && (note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().equals(jDateEnd.getDate())  //t1<x=t2
                             || note.getDateCreate().after(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate())  //t1<x<t2
-                            || note.getDateCreate().equals(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate()))) {  //t1<x=t2
+                            || note.getDateCreate().equals(jDateBeg.getDate()) && note.getDateCreate().before(jDateEnd.getDate()))) {  //t1=x<t2
                         if (note.getClass() == NoteText.class) {
                             if (choiceAllTextNote.isSelected() != true)
                                 continue;
@@ -259,12 +248,11 @@ public class StartWindow extends JDialog {
                                 defaultListModel.addElement(note);
                         }
                     }
-
-
                 }
                 jListWithNote.setModel(defaultListModel);
             }
         });
+
         updateDateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -328,7 +316,6 @@ public class StartWindow extends JDialog {
                 if (list.get(i).toLowerCase().contains(str.toLowerCase()))
                     return 1;
             }
-
         } else if (note.getClass() == NoteWithImage.class) {
             if (note.getHeader().toLowerCase().contains(str.toLowerCase()))
                 return 1;
