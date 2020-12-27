@@ -1,6 +1,7 @@
 import functionals.FileReaderWriter;
 import inputData.Note;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class GUI {
         try {
             FileReaderWriter.Write(dialog.getNoteList());
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ошибка записи файла!");
         }
         System.exit(0);
     }
