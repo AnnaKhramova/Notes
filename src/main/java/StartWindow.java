@@ -103,7 +103,7 @@ public class StartWindow extends JDialog {
                 editNoteTextDialog.pack();
                 editNoteTextDialog.setVisible(true);
                 NoteText noteText = editNoteTextDialog.getNoteText();
-                if (editNoteTextDialog.getNoteText() != null) {
+                if (editNoteTextDialog.getStatusCode() != 0) {
                     defaultListModel.addElement(noteText);
                     noteList.add(noteText);
                 } else //else не сохранились изменения

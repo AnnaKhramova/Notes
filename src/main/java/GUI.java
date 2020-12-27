@@ -14,7 +14,7 @@ public class GUI {
 
                 dialog.setNoteList(noteList);
         } catch (IOException | ClassNotFoundException e) {
-            dialog.setNoteList(new ArrayList<>());//кастыль
+            dialog.setNoteList(new ArrayList<>());//костыль
         }
         dialog.pack();
         dialog.setVisible(true);

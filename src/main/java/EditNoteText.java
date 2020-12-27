@@ -13,6 +13,11 @@ public class EditNoteText extends JDialog {
     private JTextArea headerArea;
     private JLabel dateLabel;
     private NoteText noteText;
+    private int statusCode;
+
+    public int getStatusCode() {
+        return statusCode;
+    }
 
     public JLabel getDateLabel() {
         return dateLabel;
@@ -34,6 +39,7 @@ public class EditNoteText extends JDialog {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                statusCode = 1;
                 noteText = new NoteText(headerArea.getText(), noteArea.getText(), new Date());
                 dispose();
             }

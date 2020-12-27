@@ -11,7 +11,7 @@ import java.util.Date;
 public class EditNoteWithImage extends JDialog {
     private JPanel contentPane;
     private JButton downloadImageButton;
-    private JButton saveNodeButton;
+    private JButton saveNoteButton;
     private JTextArea textAreaHeader;
     private JLabel imageLabel;
     private JLabel timeLabel;
@@ -69,7 +69,7 @@ public class EditNoteWithImage extends JDialog {
             }
         });
 
-        saveNodeButton.addActionListener(new ActionListener() {
+        saveNoteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                     statusCode = 1;
